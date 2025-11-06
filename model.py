@@ -3,8 +3,9 @@ from typing import List
 
 import torch
 import torch.nn.functional as F
-from health_multimodal.image import get_biovil_resnet_inference
-from health_multimodal.text import get_cxr_bert_inference
+from health_multimodal.image import get_image_inference
+from health_multimodal.image.utils import ImageModelType
+from health_multimodal.text import get_bert_inference
 from health_multimodal.vlp import ImageTextInferenceEngine
 
 from utils import cos_sim_to_prob, prob_to_log_prob, log_prob_to_prob
@@ -12,8 +13,8 @@ from utils import cos_sim_to_prob, prob_to_log_prob, log_prob_to_prob
 
 class InferenceModel():
     def __init__(self):
-        self.text_inference = get_cxr_bert_inference()
-        self.image_inference = get_biovil_resnet_inference()
+        self.text_inference = get_bert_inference()
+        self.image_inference = get_image_inference(ImageModelType.BIOVIL)
         self.image_text_inference = ImageTextInferenceEngine(
             image_inference_engine=self.image_inference,
             text_inference_engine=self.text_inference,

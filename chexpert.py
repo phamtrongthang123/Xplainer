@@ -21,7 +21,7 @@ class CheXpertDataset(Dataset):
                 # Hardcoded for robustness and consistency
                 disease_keys = ['No Finding', 'Enlarged Cardiomediastinum', 'Cardiomegaly', 'Lung Opacity', 'Lung Lesion', 'Edema', 'Consolidation',
                                 'Pneumonia', 'Atelectasis', 'Pneumothorax', 'Pleural Effusion', 'Pleural Other', 'Fracture', 'Support Devices']
-                for key, value in d.iteritems():
+                for key, value in d.items():
                     if key in disease_keys:
                         diseases[key] = value
                 disease_values = [diseases[key] for key in disease_keys]  # same order as disease_keys

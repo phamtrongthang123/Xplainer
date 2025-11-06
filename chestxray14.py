@@ -21,7 +21,7 @@ class ChestXray14Dataset(Dataset):
             disease_keys = ['No Finding', 'Atelectasis', 'Cardiomegaly', 'Pleural Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia',
                             'Pneumothorax',
                             'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural Thickening', 'Hernia']
-            for key, value in d.iteritems():
+            for key, value in d.items():
                 key = key.replace('_', ' ')
                 if key in disease_keys:
                     diseases[key] = value

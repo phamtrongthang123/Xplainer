@@ -30,36 +30,41 @@ in improving the performance and explainability of zero-shot diagnosis.
 
 ### Setup:
 1. Clone this repository
-   ```
-   git clone https://github.com/ChantalMP/Xplainer
-   ```
+```
+git clone https://github.com/ChantalMP/Xplainer
+```
 2. Install requirements:
-   
-   - use Python 3.7
-   - install requirements:
-   ```
-   conda create -n xplainer_env python=3.7
-   conda activate xplainer_env
-   pip install hi-ml-multimodal==0.1.2
-   pip install -r requirements.txt
-   ```
+
+- use Python 3.7
+- install requirements:
+```
+conda env remove -n xplainer_env
+conda create -n xplainer_env python=3.9 -y
+conda activate xplainer_env
+pip install uv
+uv pip install hi-ml-multimodal
+uv pip install pandas==2.0.3 numpy==1.24.3 scikit-learn
+```
    
 3. Download data
    
-   CheXpert:
-   - download data from https://stanfordaimi.azurewebsites.net/datasets/23c56a0d-15de-405b-87c8-99c30138950c
-   - copy 'test_labels.csv' and the image folder 'test' into 'data/chexpert'
-  
-   ChestXRay14:
-   - download data from 'https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/36938765345'
-   - use the script 'preprocess_chestxray14' to download the data
-   - copy 'images', 'test_list.txt' and 'Data_Entry_2017_v2020.csv' into 'data/chestxray14'
-   - run
-     ```
-      python -m preprocesss_chestxray14
-     ```
+CheXpert:
+- download data from https://stanfordaimi.azurewebsites.net/datasets/23c56a0d-15de-405b-87c8-99c30138950c
+- copy 'test_labels.csv' and the image folder 'test' into 'data/chexpert'
+
+ChestXRay14:
+- download data from 'https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/36938765345'
+- use the script 'preprocess_chestxray14' to download the data
+- copy 'images', 'test_list.txt' and 'Data_Entry_2017_v2020.csv' into 'data/chestxray14'
+- run
+```
+python -m preprocesss_chestxray14
+```
 
 ### Reproduce our results:
+
+srun --partition=agpu06 --time=01:00:00 --cpus-per-task=32 --nodelist=c1905 --pty bash
+
 run
 ```
 python -m inference --dataset chexpert
